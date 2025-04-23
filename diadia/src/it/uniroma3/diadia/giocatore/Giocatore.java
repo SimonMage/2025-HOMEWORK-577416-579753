@@ -1,35 +1,31 @@
 package it.uniroma3.diadia.giocatore;
-import it.uniroma3.attrezzi.Attrezzo;
 
 public class Giocatore {
-    private int cfu;
-    private Borsa borsa;
+	static final private int CFU_INIZIALI = 20;
 
-    public Giocatore() {
-        this.borsa = new Borsa(); // inizializza Borsa per il giocatore
-    }
+	private int cfu;
+	private Borsa borsa;
 
-    public int getCfu() {
-        return cfu;
-    }
+	public Giocatore() {
+		this.cfu = CFU_INIZIALI;
+		this.borsa = new Borsa();
+	}
 
-    public void setCfu(int cfu) {
-        this.cfu = cfu;
-    }
+	public int getCfu() {
+		return this.cfu;
+	}
 
-    public Borsa getBorsa() {
-        return borsa;
-    }
+	public void setCfu(int cfu) {
+		this.cfu = cfu;		
+	}
 
-    public void setBorsa(Borsa borsa) {
-        this.borsa = borsa;
-    }
+	public Borsa getBorsa() {
+		return borsa;
+	}
 
-    public boolean prendereAttrezzo(Attrezzo attrezzo) {
-        return this.borsa.addAttrezzo(attrezzo);
-    }
-
-    public Attrezzo posareAttrezzo(String nomeAttrezzo) {
-        return this.borsa.removeAttrezzo(nomeAttrezzo);
-    }
+	public void setBorsa(Borsa borsa) {
+		this.borsa = borsa;
+	}	
+	
+	
 }

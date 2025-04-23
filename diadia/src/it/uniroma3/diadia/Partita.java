@@ -1,6 +1,7 @@
 package it.uniroma3.diadia;
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.Stanza;
+
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
@@ -12,46 +13,72 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  */
 
 public class Partita {
-    static final private int CFU_INIZIALI = 20;
 
-    private Labirinto labirinto;
-    private Stanza stanzaCorrente;
-    private boolean finita;
-    private Giocatore giocatore; // referenza per Giocatore
 
-    public Partita() {
-        this.labirinto = new Labirinto();
-        this.stanzaCorrente = labirinto.getStanzaIniziale();
-        this.finita = false;
-        this.giocatore = new Giocatore(); // inizializza Giocatore
-        this.giocatore.setCfu(CFU_INIZIALI); // setta i CFU in Giocatore
-    }
 
-    public Stanza getStanzaCorrente() {
-        return this.stanzaCorrente;
-    }
+	private Labirinto labirinto;
+	private Giocatore giocatore;
+	private boolean finita;
 
-    public void setStanzaCorrente(Stanza stanzaCorrente) {
-        this.stanzaCorrente = stanzaCorrente;
-    }
+	public Partita(){
+		labirinto = new Labirinto();
+		giocatore = new Giocatore();
+		labirinto.creaStanze();
+		this.finita = false;
+	}
 
-    public boolean vinta() {
-        return this.getStanzaCorrente().equals(this.labirinto.getStanzaFinale());
-    }
-
-    public boolean isFinita() {
-        return finita || vinta() || (this.giocatore.getCfu() == 0); // get CFU dal Giocatore
-    }
-
-    public void setFinita() {
-        this.finita = true;
-    }
-
-    public Giocatore getGiocatore() {
-        return this.giocatore; // getter di Giocatore
-    }
-
-	public Labirinto getLabirinto() {
+	public Labirinto getLabirinto(){
 		return labirinto;
 	}
+
+	public void setLabirinto(Labirinto labirinto) {
+		this.labirinto = labirinto;
+	}
+
+
+	public Giocatore getGiocatore() {
+		return giocatore;
+	}
+
+	public void setGiocatore(Giocatore giocatore) {
+		this.giocatore = giocatore;
+	}
+
+	/**
+	 * Restituisce vero se e solo se la partita e' stata vinta
+	 * @return vero se partita vinta
+	 */
+	public boolean vinta() {
+		return labirinto.getStanzaCorrente()== labirinto.getStanzaVincente();
+	}
+
+	/**
+	 * Restituisce vero se e solo se la partita e' finita
+	 * @return vero se partita finita
+	 */
+	public boolean isFinita() {
+		return finita || vinta() || (this.getGiocatore().getCfu() == 0);
+	}
+
+	/**
+	 * Imposta la partita come finita
+	 *
+	 */
+	public void setFinita() {
+		this.finita = true;
+	}
+
+	public boolean giocatoreIsVivo() {
+		return this.giocatore.getCfu()>0;
+	}
+	
+	public void setStanzaCorrente(Stanza stanzaCorrente) {
+		this.getLabirinto().setStanzaCorrente(stanzaCorrente);
+	}
+
+	public Stanza getStanzaCorrente() {
+		return this.getLabirinto().getStanzaCorrente();
+	}
+	
+
 }
