@@ -38,8 +38,8 @@ public class FabbricaDiComandiFisarmonica {
 			else comando = new ComandoNonValido();
 			comando.setParametro(parametro);
 			comando.setIo(this.io);
-			scannerDiParole.close();
 			return comando;
+			//scannerDiParole.close();
 		}
 	}
 }
